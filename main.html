@@ -1,16 +1,75 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       .container{
+         display:grid;
+         grid-template-columns: repeat(3,100px);
+         grid-template-rows: repeat(3,100px);
+         gap:5px;
+         justify-content: center;
+       }
+       .grid-items{
+         border:2px solid black;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         font-size: 2rem;
+       }
+       .action{
+        display: flex;
+        justify-content: center;
+        margin-top:10px;
+        gap:1rem;
+       }
+    </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <div class="container">
+        <div class="grid-items" id="1">1</div>
+        <div class="grid-items" id="2">2</div>
+        <div class="grid-items" id="3">3</div>
+        <div class="grid-items" id="4">4</div>
+        <div class="grid-items" id="5">5</div>
+        <div class="grid-items" id="6">6</div>
+        <div class="grid-items" id="7">7</div>
+        <div class="grid-items" id="8">8</div>
+        <div class="grid-items" id="9">9</div>
+     </div>
+     <form class="action" id="color-form">
+        <label for="selectBox">Select Box:</label>
+        <input type="text" id="selectBox" required>
+        <label for="enterColor">Enter Color:</label>
+        <input type="text" id="enterColor" required>
+        <input type="submit" value="submit">
+     </form>
 
+     <script>
+        const form=document.getElementById("color-form")
+        const boxes=document.querySelectorAll(".grid-items")
+        form.addEventListener("submit",getAndAddcolor)
+        function getAndAddcolor(e){
+           e.preventDefault()
+           const selectedBox=e.target[0].value
+           const selectedColor=e.target[1].value
+           if(parseInt(selectedBox)>0 && parseInt(selectedBox)<10){
+           clearBg()
+           e.target.reset()
+           const targetedbox=document.getElementById(selectedBox)
+           targetedbox.style.backgroundColor=selectedColor
+           }
+           else{
+            alert("Enter Valid Box Number")
+           }
+        }
+        function clearBg(){
+            for(box of boxes){
+                box.style.backgroundColor="transparent"
+            }
+        }
+     </script>
 </body>
-
 </html>
